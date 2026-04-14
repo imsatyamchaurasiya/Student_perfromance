@@ -71,13 +71,14 @@ st.write("Filtered Data",filtered_grade_df)
 # Some rough analysis of the dataset
 student_name = st.selectbox("Select Student", df["Name"].unique())
 
-# Button click → go to next page
+# Showing Scorecard
 if st.button("View Scorecard"):
     st.session_state["student"] = student_name
-    st.session_state["page"] = "Scorecard"
+    st.session_state["page"] = "scorecard"
+    st.rerun()
 
-# Page switch logic
-st.page_link("pages/Scorecard.py", label="View Scorecard")
+if st.session_state.get("page") == "scorecard":
+    import pages.Scorecard
     
 # Deploying the model for predicting score
 st.title("Student marks prediction")
