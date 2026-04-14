@@ -77,8 +77,7 @@ if st.button("View Scorecard"):
     st.session_state["page"] = "Scorecard"
 
 # Page switch logic
-if st.session_state.get("page") == "Scorecard":
-    st.switch_page("pages/Scorecard.py")
+st.page_link("pages/Scorecard.py", label="View Scorecard")
     
 # Deploying the model for predicting score
 st.title("Student marks prediction")
@@ -87,6 +86,6 @@ Study_Hours = st.number_input("Enter Study Hours", min_value=0, max_value=24, va
 Attendence = st.number_input("Enter Attendance Percentage", min_value=0, max_value=100, value=90)
 btn=st.button("Predict Marks")
 if btn:
-    model = pickle.load(open("spd.pkl", "rb"))
-    result = model.predict([[Sleep_Hours, Study_Hours, Attendence]])
+    Rf = pickle.load(open("spd.pkl", "rb"))
+    result = Rf.predict([[Sleep_Hours, Study_Hours, Attendence]])
     st.success(f"Your predicted marks are {result[0]}")
